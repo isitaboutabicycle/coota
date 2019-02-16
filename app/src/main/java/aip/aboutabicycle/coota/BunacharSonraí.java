@@ -68,10 +68,8 @@ public abstract class BunacharSonraí extends RoomDatabase {
 
             try{
                 // an comhad á bogadh
-//                final InputStream sruthIsteach = comhthéacs.getAssets().open(ainm);
-//                final OutputStream sruthAmach = new FileOutputStream("databases/"+conairCheart);
-                final InputStream sruthIsteach = comhthéacs.getAssets().open("assets/databases");
-                final OutputStream sruthAmach = new FileOutputStream("app/databases");
+                final InputStream sruthIsteach = comhthéacs.getAssets().open(ainm);
+                final OutputStream sruthAmach = new FileOutputStream("databases/"+conairCheart);
 
                 byte[] maolán = new byte[8192];
                 int fad;
