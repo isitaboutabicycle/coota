@@ -25,7 +25,9 @@ public class GFoclooir extends AppCompatActivity {
     private EditText boscaCuardach;
     private TextWatcher fairtheoir;
 
-    private SamhailAmharcNanIontrálacha samhailAmharcNanIontrálacha;
+    private ORF orf; // Obiacht Rochtain ar Fhaisnéis
+
+//    private SamhailAmharcNanIontrálacha samhailAmharcNanIontrálacha;
     public static final String AINM_AN_FHOCLÓRA = "Foclooir.db";
     private String LAATHAIR_CHOMHAID_AN_FHOCLOORA = "Foclooir.json";
 /*
@@ -55,6 +57,9 @@ public class GFoclooir extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.g_foclooir);
 
+        orf = ORF.faighSampla(getApplicationContext());
+        orf.oscail();
+
         // amharc liosta á thúsú
         amharcAthchúrsála = findViewById(R.id.foclooir);
         amharcAthchúrsála.setLayoutManager(new LinearLayoutManager(this));
@@ -64,15 +69,15 @@ public class GFoclooir extends AppCompatActivity {
         amharcAthchúrsála.setAdapter(feilire);
         amharcAthchúrsála.setLayoutManager(new LinearLayoutManager(this));
 
-        samhailAmharcNanIontrálacha =
-                ViewModelProviders.of(this).get(SamhailAmharcNanIontrálacha.class);samhailAmharcNanIontrálacha.faighIontrálacha()
-                .observe(this,
-                        new Observer<List<Iontráil>>() {
-                    @Override
-                    public void onChanged(@Nullable final List<Iontráil> iontrálacha) {
-                        feilire.cuirIontrálacha(iontrálacha);
-                    }
-                });
+//        samhailAmharcNanIontrálacha =
+//                ViewModelProviders.of(this).get(SamhailAmharcNanIontrálacha.class);samhailAmharcNanIontrálacha.faighIontrálacha()
+//                .observe(this,
+//                        new Observer<List<Iontráil>>() {
+//                    @Override
+//                    public void onChanged(@Nullable final List<Iontráil> iontrálacha) {
+//                        feilire.cuirIontrálacha(iontrálacha);
+//                    }
+//                });
 
         boscaCuardach = (EditText) findViewById(R.id.cuardaigh);
 
@@ -135,8 +140,10 @@ public class GFoclooir extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 String ionchur = boscaCuardach.getText().toString();
                 try{
-//                    feilire.cuirIontrálacha(samhailAmharcNanIontrálacha.uasdátaighIontrálacha(ionchur));
-                    samhailAmharcNanIontrálacha.uasdátaighIontrálacha(ionchur);
+                    ArrayList<Iontráil> aischur = orf.faighIontrálacha(ionchur);
+                    feilire.cuirIontrálacha(aischur);
+//                    samhailAmharcNanIontrálacha.uasdátaighIontrálacha(ionchur);
+
 
                 } catch (Exception e){
                     String teachtaireacht = R.string.fadhb_snáth+" "+e.getMessage();
