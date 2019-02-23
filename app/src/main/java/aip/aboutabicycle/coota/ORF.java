@@ -12,7 +12,7 @@ public class ORF {
     private SQLiteOpenHelper osclóir;
     private SQLiteDatabase bs;
     private static ORF sampla;
-    Cursor c = null;
+    private Cursor cúrsóir = null;
 
     // aonarán
     private ORF(Context comhthéacs){
@@ -40,16 +40,16 @@ public class ORF {
 
     public ArrayList<Iontráil> faighIontrálacha(String ionchur){
         ArrayList<Iontráil> aschur = new ArrayList<Iontráil>();
-        c = bs.rawQuery(
+        cúrsóir = bs.rawQuery(
                 "SELECT * FROM iontraail WHERE ceann LIKE '"+ionchur+"' ORDER BY ceann DESC LIMIT 100",
                      new String[]{}
         );
 
-        int innéacAnAinm = c.getColumnIndex("ceann");
-        int innéacsAnSainmhínithe = c.getColumnIndex("sainmhiiniuu");
-        while(c.moveToNext()){
+        int innéacAnAinm = cúrsóir.getColumnIndex("ceann");
+        int innéacsAnSainmhínithe = cúrsóir.getColumnIndex("sainmhiiniuu");
+        while(cúrsóir.moveToNext()){
             Iontráil iontráil = new Iontráil(
-                    c.getString(innéacAnAinm), c.getString(innéacsAnSainmhínithe)
+                    cúrsóir.getString(innéacAnAinm), cúrsóir.getString(innéacsAnSainmhínithe)
             );
             aschur.add(iontráil);
         }

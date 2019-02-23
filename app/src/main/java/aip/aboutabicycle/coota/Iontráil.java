@@ -49,37 +49,3 @@ public class Iontráil {
         this.sainmhíniú = sainmhíniú;
     }
 }
-
-/*
-    Nótaí:
-    @Ignore - déanfaidh Room neamhaird ar an athróg seo
- */
-
-
-
-/*public class Iontráil {
-    public String teidil;
-    public String rannCainte;
-    public String sainmhiiniuu;
-
-    public Iontráil(String moTheidil)
-    {
-        teidil = moTheidil;
-        rannCainte = null;
-        sainmhiiniuu = null;
-    }
-
-    public Iontráil(String moTheidil, String moShainmhiiniuu)
-    {
-        teidil = moTheidil;
-        rannCainte = null;
-        sainmhiiniuu = moShainmhiiniuu;
-    }
-
-    public Iontráil(String moTheidil, String moRannCainte, String moShainmhiiniuu)
-    {
-        teidil = moTheidil;
-        rannCainte = moRannCainte;
-        sainmhiiniuu = moShainmhiiniuu;
-    }
-}*/

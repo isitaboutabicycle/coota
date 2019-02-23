@@ -1,7 +1,7 @@
 package aip.aboutabicycle.coota;
 import android.content.Context;
 
-import com.readystatesoftware.sqliteasset.SQLiteAssetHelper; //https://github.com/jgilfelt/android-sqlite-asset-helper
+import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 public class OsclóirBhunacharSonraí extends SQLiteAssetHelper {
 
