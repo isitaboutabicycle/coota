@@ -42,6 +42,6 @@ dependencies {
     implementation "android.arch.persistence.room:runtime:$room_version"
     annotationProcessor "android.arch.persistence.room:compiler:$room_version"
 
-    // alternative to room
-    implementation 'com.github.humazed:RoomAsset:1.0.3'
+    // alternative to SQLiteOpenHelper
+    api 'com.readystatesoftware.sqliteasset:sqliteassethelper:+'
 }
