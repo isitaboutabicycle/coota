@@ -42,10 +42,48 @@ public class ORF {
 
     public ArrayList<Iontráil> faighIontrálacha(String ionchur){
         ArrayList<Iontráil> aschur = new ArrayList<Iontráil>();
-        cúrsóir = bs.rawQuery(
-                "SELECT * FROM iontraail WHERE ceann LIKE '"+ionchur+"%' ORDER BY ceann DESC LIMIT 100",
-                     new String[]{}
+        //TODO: seachan ionsaithe XSS!!! déan feabhsú ollmhór air seo
+        if(ionchur.contains("<")
+                || ionchur.contains(">")
+                || ionchur.contains("DROP TABLE")){
+            return aschur;
+        }
+
+        aschur = déanCuardach(
+                "SELECT * FROM iontraail WHERE ceann LIKE '"+ionchur+"' ORDER BY ceann DESC LIMIT 100"
         );
+        if(!aschur.isEmpty()){
+            aschur.add(new Iontráil("\n\n","\n\n"));
+        }
+
+        ArrayList<Iontráil> cuardachEile = déanCuardach("SELECT * FROM iontraail WHERE ceann LIKE '"+ionchur+"%' ORDER BY ceann DESC LIMIT 100");
+        for (Iontráil iontráil : cuardachEile) {
+            if (!aschur.contains(iontráil)){ //TODO: níl sé seo ag obair
+                aschur.add(iontráil);
+            }
+        }
+
+        if(ionchur.length() > 1){
+            cuardachEile = déanCuardach(
+                    "SELECT * FROM iontraail WHERE sainmhiiniuu LIKE '%"+ionchur+"%' ORDER BY ceann DESC LIMIT 50"
+            );
+            if (!cuardachEile.isEmpty()){
+                aschur.add(new Iontráil("\n\n","\n\n")); //TODO: déan i mbealach níos fearr
+
+                for (Iontráil iontráil : cuardachEile) {
+                    if (!aschur.contains(iontráil)){
+                        aschur.add(iontráil);
+                    }
+                }
+            }
+        }
+
+        return aschur;
+    }
+
+    private ArrayList<Iontráil> déanCuardach(String teaghránChuardaigh){
+        ArrayList<Iontráil> aschur = new ArrayList<Iontráil>();
+        cúrsóir = bs.rawQuery(teaghránChuardaigh, new String[]{});
 
         int innéacAnAinm = cúrsóir.getColumnIndex("ceann");
         int innéacsAnSainmhínithe = cúrsóir.getColumnIndex("sainmhiiniuu");
