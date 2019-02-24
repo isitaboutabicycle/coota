@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class GFoclooir extends AppCompatActivity {
@@ -18,6 +19,8 @@ public class GFoclooir extends AppCompatActivity {
     private TextWatcher fairtheoir;
 
     private ORF orf; // Obiacht Rochtain ar Fhaisnéis
+
+    private String teaghránCuardaithe;
 
 /*
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -71,9 +74,9 @@ public class GFoclooir extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                String ionchur = boscaCuardach.getText().toString();
+                teaghránCuardaithe = boscaCuardach.getText().toString();
                 try {
-                    ArrayList<Iontráil> aischur = orf.faighIontrálacha(ionchur);
+                    ArrayList<Iontráil> aischur = orf.faighIontrálacha(teaghránCuardaithe);
                     feilire.cuirIontrálacha(aischur);
 
                 } catch (Exception e) {
@@ -87,5 +90,11 @@ public class GFoclooir extends AppCompatActivity {
 
         //BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         //navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+    }
+
+    @Override
+    protected void onDestroy(){
+        orf.dún();
+        super.onDestroy();
     }
 }

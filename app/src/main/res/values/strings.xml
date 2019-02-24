@@ -3,6 +3,8 @@
     <string name="title_home">Baile</string>
     <string name="title_dashboard">Téacs</string>
     <string name="title_notifications">Nótaí</string>
+    <string name="cuardach">Déan cuardach&#8230;</string><!-- TODO: bain leas astu seo -->
+    <string name="lipéad_cuardach">Bosca cuardach</string>
     <string name="fadhb_comhad">Tharla fadhb agus an comhad á léamh</string>
     <string name="fadhb_snáth">Briseadh isteach ar an obair. Bain triall as arís.</string>
 </resources>

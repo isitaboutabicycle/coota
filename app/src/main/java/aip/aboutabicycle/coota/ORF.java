@@ -20,18 +20,20 @@ public class ORF {
     }
 
     public static ORF faighSampla(Context comhthéacs){
-        if(sampla == null){
+        if(sampla == null ){
             sampla = new ORF(comhthéacs);
         }
         return sampla;
     }
 
-    // TODO: cuir ar ais Boole
     public void oscail(){
         this.bs = osclóir.getWritableDatabase();
     }
 
-    //TODO: mar an gcéanna
+    public boolean oscailte(){
+        return this.bs.isOpen();
+    }
+
     public void dún() {
         if(bs != null){
             this.bs.close();
@@ -41,7 +43,7 @@ public class ORF {
     public ArrayList<Iontráil> faighIontrálacha(String ionchur){
         ArrayList<Iontráil> aschur = new ArrayList<Iontráil>();
         cúrsóir = bs.rawQuery(
-                "SELECT * FROM iontraail WHERE ceann LIKE '"+ionchur+"' ORDER BY ceann DESC LIMIT 100",
+                "SELECT * FROM iontraail WHERE ceann LIKE '"+ionchur+"%' ORDER BY ceann DESC LIMIT 100",
                      new String[]{}
         );
 

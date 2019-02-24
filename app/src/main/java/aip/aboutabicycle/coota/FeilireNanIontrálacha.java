@@ -36,7 +36,7 @@ public class FeilireNanIontrálacha extends RecyclerView.Adapter<FeilireNanIontr
 
     public void cuirIontrálacha(List<Iontráil> liosta) {
         this.iontrálacha = liosta;
-        notifyDataSetChanged(); //TODO: tá leaganacha níos fearr ann
+        notifyDataSetChanged(); //TODO: tá bealaí níos fearr ann
     }
 
 

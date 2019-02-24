@@ -6,14 +6,14 @@ import android.arch.persistence.room.PrimaryKey;
 //import androidx.room.Fts4;
 
 //@Fts4 //full text search https://www.sqlite.org/fts3.html
-@Entity(tableName = "iontraail")
+//@Entity(tableName = "iontraail")
 public class Iontráil {
 
-    @PrimaryKey//(autoGenerate = true)
+    //@PrimaryKey//(autoGenerate = true)
     private int id;
-    @ColumnInfo(name="ceann")
+    //@ColumnInfo(name="ceann")
     private String ceannfhocal;
-    @ColumnInfo(name="sainmhiiniuu")
+    //@ColumnInfo(name="sainmhiiniuu")
     private String sainmhíniú;
 
 
