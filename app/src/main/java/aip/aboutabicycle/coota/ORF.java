@@ -2,10 +2,13 @@ package aip.aboutabicycle.coota;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 // Obiacht Rochtain ar Fhaisnéis
 public class ORF {
@@ -81,7 +84,28 @@ public class ORF {
         return aschur;
     }
 
-    private ArrayList<Iontráil> déanCuardach(String teaghránChuardaigh){
+    public synchronized ArrayList<Iontráil> iontráilRandamach(Context comhthéacs){
+        ArrayList<Iontráil> aschur = new ArrayList<Iontráil>();
+
+        long líon = DatabaseUtils.queryNumEntries(bs, "iontraail");
+        int uimhirRandamach = 0;
+        Random randamach = new Random();
+
+        //TODO: úsáid bealach níos fearr
+        if(líon > Integer.MAX_VALUE){
+            líon = Integer.MAX_VALUE;
+            Toast.makeText(comhthéacs, R.string.fadhb_randamach, Toast.LENGTH_LONG);
+        }
+        uimhirRandamach = randamach.nextInt((int)líon);
+
+        String teaghránCuardach = "SELECT * FROM iontraail WHERE id = '" + uimhirRandamach + "'";
+
+        aschur = déanCuardach(teaghránCuardach);
+
+        return aschur;
+    }
+
+    private synchronized ArrayList<Iontráil> déanCuardach(String teaghránChuardaigh){
         ArrayList<Iontráil> aschur = new ArrayList<Iontráil>();
         cúrsóir = bs.rawQuery(teaghránChuardaigh, new String[]{});
 

@@ -1,15 +1,16 @@
 package aip.aboutabicycle.coota;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class GFoclooir extends AppCompatActivity {
@@ -52,16 +53,15 @@ public class GFoclooir extends AppCompatActivity {
         orf = ORF.faighSampla(getApplicationContext());
         orf.oscail();
 
-        // amharc liosta á thúsú
+        // amhairc á dtúsú
         amharcAthchúrsála = findViewById(R.id.foclooir);
         amharcAthchúrsála.setLayoutManager(new LinearLayoutManager(this));
         amharcAthchúrsála.setHasFixedSize(true);
+        boscaCuardach = (EditText) findViewById(R.id.cuardaigh);
 
         final FeilireNanIontrálacha feilire = new FeilireNanIontrálacha();
         amharcAthchúrsála.setAdapter(feilire);
         amharcAthchúrsála.setLayoutManager(new LinearLayoutManager(this));
-
-        boscaCuardach = (EditText) findViewById(R.id.cuardaigh);
 
         fairtheoir = new TextWatcher() {
             @Override
@@ -85,8 +85,17 @@ public class GFoclooir extends AppCompatActivity {
                 }
             }
         };
-
         boscaCuardach.addTextChangedListener(fairtheoir);
+
+        // cnaipe gnímh ag ainliú
+        FloatingActionButton cga = findViewById(R.id.cga);
+        cga.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ArrayList<Iontráil> aischur = orf.iontráilRandamach(getApplicationContext());
+                feilire.cuirIontrálacha(aischur);
+            }
+        });
 
         //BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         //navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);

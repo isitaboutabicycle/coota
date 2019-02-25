@@ -7,4 +7,6 @@
     <string name="lipéad_cuardach">Bosca cuardach</string>
     <string name="fadhb_comhad">Tharla fadhb agus an comhad á léamh</string>
     <string name="fadhb_snáth">Briseadh isteach ar an obair. Bain triall as arís.</string>
+    <string name="fadhb_randamach">Ní bheidh sé seo fíor-randamach toisc go bhfuil an bunachar sonraí ró-mhór</string>
+
 </resources>
