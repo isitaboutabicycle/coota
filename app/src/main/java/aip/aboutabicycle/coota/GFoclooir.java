@@ -74,7 +74,7 @@ public class GFoclooir extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                teaghránCuardaithe = boscaCuardach.getText().toString();
+                teaghránCuardaithe = boscaCuardach.getText().toString().trim();
                 try {
                     ArrayList<Iontráil> aischur = orf.faighIontrálacha(teaghránCuardaithe);
                     feilire.cuirIontrálacha(aischur);
