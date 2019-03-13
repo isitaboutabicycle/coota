@@ -10,7 +10,7 @@ import android.arch.persistence.room.PrimaryKey;
 public class Iontráil {
 
     //@PrimaryKey//(autoGenerate = true)
-    private int id;
+    private int id = 0;
     //@ColumnInfo(name="ceann")
     private String ceannfhocal;
     //@ColumnInfo(name="sainmhiiniuu")

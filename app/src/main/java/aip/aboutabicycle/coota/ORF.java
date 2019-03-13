@@ -16,6 +16,10 @@ public class ORF {
     private SQLiteDatabase bs;
     private static ORF sampla;
     private Cursor cúrsóir = null;
+    private String cuardachDeireanach = "";
+    private String cuardachNíosSine = "";
+    private int idDeireanach;
+    private int idNíosSine;
 
     // aonarán
     private ORF(Context comhthéacs){
@@ -45,6 +49,11 @@ public class ORF {
 
     public ArrayList<Iontráil> faighIontrálacha(String ionchur){
         ArrayList<Iontráil> aschur = new ArrayList<Iontráil>();
+        int tús = 0;
+        String príomhtheaghránCuardachAnChinn;
+        String teaghránEileCuardachAnChinn;
+        String teaghránCuardachAntSainmhínithe;
+
         //TODO: seachan ionsaithe XSS!!! déan feabhsú ollmhór air seo
         if(ionchur.contains("<")
                 || ionchur.contains(">")
@@ -52,27 +61,51 @@ public class ORF {
             return aschur;
         }
 
-        aschur = déanCuardach(
-                "SELECT * FROM iontraail WHERE ceann LIKE '"+ionchur+"' ORDER BY ceann DESC LIMIT 100"
-        );
+        if(ionchur.startsWith(cuardachNíosSine)){
+            tús = idNíosSine;
+
+            if(ionchur.startsWith(cuardachDeireanach)){
+                tús = idDeireanach;
+            }
+        }
+
+        príomhtheaghránCuardachAnChinn = "SELECT * FROM iontraail WHERE id >= " + tús +
+                " AND ceann LIKE '"+ionchur+"' ORDER BY ceann DESC LIMIT 100";
+        teaghránEileCuardachAnChinn = "SELECT * FROM iontraail WHERE id >= " + tús +
+                " AND ceann LIKE '%"+ionchur+"%' ORDER BY ceann DESC LIMIT 100";
+        teaghránCuardachAntSainmhínithe = "SELECT * FROM iontraail WHERE id >= " + tús +
+                " AND sainmhiiniuu LIKE '%"+ionchur+"%' ORDER BY ceann DESC LIMIT 50";
+
+        // céad chuardach
+        aschur = déanCuardach(príomhtheaghránCuardachAnChinn);
         if(!aschur.isEmpty()){
             aschur.add(new Iontráil("\n\n","\n\n"));
         }
 
-        ArrayList<Iontráil> cuardachEile = déanCuardach("SELECT * FROM iontraail WHERE ceann LIKE '"+ionchur+"%' ORDER BY ceann DESC LIMIT 100");
-        for (Iontráil iontráil : cuardachEile) {
-            if (!aschur.contains(iontráil)){ //TODO: níl sé seo ag obair
-                aschur.add(iontráil);
+        // dara cuardach
+        ArrayList<Iontráil> cuardachEile = déanCuardach(teaghránEileCuardachAnChinn);
+        for (Iontráil iontráilNua : cuardachEile) { //TODO: seo bealach fadálach
+            boolean ann = false;
+
+            for (Iontráil seanIontráil : aschur){
+                if (seanIontráil.getId() == iontráilNua.getId() ){
+                    ann = true;
+                    break;
+                }
+            }
+
+            if (!ann){
+                aschur.add(iontráilNua);
             }
         }
 
+        // treas cuardach
         if(ionchur.length() > 1){
-            cuardachEile = déanCuardach(
-                    "SELECT * FROM iontraail WHERE sainmhiiniuu LIKE '%"+ionchur+"%' ORDER BY ceann DESC LIMIT 50"
-            );
-            if (!cuardachEile.isEmpty()){
+            cuardachEile = déanCuardach(teaghránCuardachAntSainmhínithe);
+            if (!aschur.isEmpty() && aschur.get(aschur.size()-1).getCeannfhocal() != "\n\n"){
                 aschur.add(new Iontráil("\n\n","\n\n")); //TODO: déan i mbealach níos fearr
-
+            }
+            if (!cuardachEile.isEmpty()){
                 for (Iontráil iontráil : cuardachEile) {
                     if (!aschur.contains(iontráil)){
                         aschur.add(iontráil);
@@ -81,6 +114,19 @@ public class ORF {
             }
         }
 
+        //todo: má tá sé níos giorra
+        if(!aschur.isEmpty() && ionchur != cuardachDeireanach){
+
+            while( aschur.get(aschur.size()-1).getCeannfhocal() == "\n\n"
+                   && aschur.get(aschur.size()-1).getSainmhíniú() == "\n\n" ){
+                aschur.remove(aschur.size()-1);
+            }
+
+            cuardachNíosSine = cuardachDeireanach;
+            idNíosSine = idDeireanach;
+            cuardachDeireanach = ionchur;
+            idDeireanach = aschur.get(0).getId();
+        }
         return aschur;
     }
 

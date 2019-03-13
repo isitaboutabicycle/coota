@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
@@ -94,6 +95,7 @@ public class GFoclooir extends AppCompatActivity {
             public void onClick(View view) {
                 ArrayList<Iontráil> aischur = orf.iontráilRandamach(getApplicationContext());
                 feilire.cuirIontrálacha(aischur);
+                //boscaCuardach.setInputType(InputType.TYPE_NULL); TODO: deisigh
             }
         });
 
