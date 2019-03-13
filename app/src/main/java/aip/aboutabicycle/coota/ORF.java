@@ -70,7 +70,7 @@ public class ORF {
         }
 
         príomhtheaghránCuardachAnChinn = "SELECT * FROM iontraail WHERE id >= " + tús +
-                " AND ceann LIKE '"+ionchur+"' ORDER BY ceann DESC LIMIT 100";
+                " AND ceann LIKE '"+ionchur+"' ORDER BY ceann DESC LIMIT 100"; //todo: cén fáth nach bhfeictear "amadán" ach "amad" a chuardach?
         teaghránEileCuardachAnChinn = "SELECT * FROM iontraail WHERE id >= " + tús +
                 " AND ceann LIKE '%"+ionchur+"%' ORDER BY ceann DESC LIMIT 100";
         teaghránCuardachAntSainmhínithe = "SELECT * FROM iontraail WHERE id >= " + tús +
@@ -84,6 +84,7 @@ public class ORF {
 
         // dara cuardach
         ArrayList<Iontráil> cuardachEile = déanCuardach(teaghránEileCuardachAnChinn);
+        boolean curthaLeis = false;
         for (Iontráil iontráilNua : cuardachEile) { //TODO: seo bealach fadálach
             boolean ann = false;
 
@@ -96,15 +97,16 @@ public class ORF {
 
             if (!ann){
                 aschur.add(iontráilNua);
+                curthaLeis = true;
             }
+        }
+        if(curthaLeis){
+            aschur.add(new Iontráil("\n\n","\n\n")); //TODO: déan i mbealach níos fearr
         }
 
         // treas cuardach
         if(ionchur.length() > 1){
             cuardachEile = déanCuardach(teaghránCuardachAntSainmhínithe);
-            if (!aschur.isEmpty() && aschur.get(aschur.size()-1).getCeannfhocal() != "\n\n"){
-                aschur.add(new Iontráil("\n\n","\n\n")); //TODO: déan i mbealach níos fearr
-            }
             if (!cuardachEile.isEmpty()){
                 for (Iontráil iontráil : cuardachEile) {
                     if (!aschur.contains(iontráil)){
