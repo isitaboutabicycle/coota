@@ -1,11 +1,11 @@
-# Cóta
+Seo aip Android d'fhoclóir aonteangach Gaeilge.
 
-Seo aip d'fhoclóir Gaeilge-Gaeilge. Níl ach tús déanta air go fóill.
+**Rabhadh**: Níl ach tús déanta air. Tá neart athchóraithe le déanamh air ó thaobh dearadh agus struchtúr de.
 
 ## Feidhmeanna
 
-&bull; déan cuardach (de réir ceannfhocail agus, faoi sin, de réir sainmhínithe)
++ Déan cuardach (tugtar torthaí de réir ceannfhocail agus, ina dhiadh sin, de réir sainmhínithe)
 
-&bull; féach iontráil randamach
++ Féach iontráil randamach
 
 Baineann sé leas as an leabharlann [android-sqlite-asset-helper](https://github.com/jgilfelt/android-sqlite-asset-helper) le jgifelt chun cabhrú le bunachar sonraí réamh-líonta a lódáil.
