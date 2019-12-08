@@ -1,6 +1,7 @@
 package aip.aboutabicycle.coota;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -67,7 +68,8 @@ public class GFoclooir extends AppCompatActivity {
         boscaCuardach = findViewById(R.id.cuardaigh);
 
         amharcAthchúrsála.setAdapter(feilire);
-        amharcAthchúrsála.setLayoutManager(new LinearLayoutManager(this));
+        //amharcAthchúrsála.setLayoutManager(new LinearLayoutManager(this));
+        amharcAthchúrsála.setLayoutManager(new BainisteoirNaLeaganachaAmach(this));
 
         fairtheoir = new TextWatcher() {
             @Override
@@ -111,6 +113,15 @@ public class GFoclooir extends AppCompatActivity {
         orf.dún();
         super.onDestroy();
     }
+
+
+
+    class Bainisteoir extends LinearLayoutManager {   Bainisteoir(Context context) {
+        super(context);
+        setSmoothScrollbarEnabled(true);
+        }
+    }
+
 
 
     private final class TascCuardaithe extends AsyncTask<ORF, Void, ArrayList<Iontráil>> {
