@@ -47,7 +47,7 @@ public class ORF {
         }
     }
 
-    public ArrayList<Iontráil> faighIontrálacha(String ionchur){
+    public synchronized ArrayList<Iontráil> faighIontrálacha(String ionchur){
         ArrayList<Iontráil> aschur = new ArrayList<Iontráil>();
         int tús = 0;
         String príomhtheaghránCuardachAnChinn;
@@ -70,11 +70,11 @@ public class ORF {
         }
 
         príomhtheaghránCuardachAnChinn = "SELECT * FROM iontraail WHERE id >= " + tús +
-                " AND ceann LIKE '"+ionchur+"' ORDER BY ceann DESC LIMIT 100"; //todo: cén fáth nach bhfeictear "amadán" ach "amad" a chuardach?
+                " AND ceann LIKE '"+ionchur+"' ORDER BY ceann LIMIT 100"; //todo: cén fáth nach bhfeictear "amadán" ach "amad" a chuardach?
         teaghránEileCuardachAnChinn = "SELECT * FROM iontraail WHERE id >= " + tús +
-                " AND ceann LIKE '%"+ionchur+"%' ORDER BY ceann DESC LIMIT 100";
+                " AND ceann LIKE '%"+ionchur+"%' ORDER BY ceann LIMIT 100";
         teaghránCuardachAntSainmhínithe = "SELECT * FROM iontraail WHERE id >= " + tús +
-                " AND sainmhiiniuu LIKE '%"+ionchur+"%' ORDER BY ceann DESC LIMIT 50";
+                " AND sainmhiiniuu LIKE '%"+ionchur+"%' ORDER BY ceann LIMIT 50";
 
         // céad chuardach
         aschur = déanCuardach(príomhtheaghránCuardachAnChinn);
