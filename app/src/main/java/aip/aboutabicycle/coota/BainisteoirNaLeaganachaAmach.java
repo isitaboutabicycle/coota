@@ -5,7 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-class BainisteoirNaLeaganachaAmach extends LinearLayoutManager {
+public class BainisteoirNaLeaganachaAmach extends LinearLayoutManager {
 
     int SMOOTH_VALUE = 10;
 

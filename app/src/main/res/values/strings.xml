@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Cóta</string>
-    <string name="title_home">Baile</string>
-    <string name="title_dashboard">Téacs</string>
-    <string name="title_notifications">Nótaí</string>
+    <string name="teidil_baile">Baile</string>
+    <string name="teidil_ceanaain">Ceanáin</string>
+    <string name="teidil_cloigiin">Nótaí</string>
     <string name="cuardach">Déan cuardach&#8230;</string><!-- TODO: bain leas astu seo -->
     <string name="lipéad_cuardach">Bosca cuardach</string>
     <string name="fadhb_comhad">Tharla fadhb agus an comhad á léamh</string>
